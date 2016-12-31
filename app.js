@@ -1,5 +1,5 @@
 'use strict';
-//let alexaVerifier = require('alexa-verifier');
+let alexaVerifier = require('alexa-verifier');
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -56,8 +56,7 @@ function requestVerifier(req, res, next) {
 // catch 404 and forward to error handler
 
 app.post('/skill',requestVerifier,  function(req, res) {
-    // We'll fill this out later!
-   // res.json({ hello: 'world' });
+ 
    var temp;
     if (req.body.request.type === 'LaunchRequest') { 
         res.json({
