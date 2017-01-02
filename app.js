@@ -172,15 +172,22 @@ app.post('/skill',requestVerifier,  function(req, res) {
                     for(var a=0;a<body.length;a++)
                         {
                             if(body[a].show.network.name.toLowerCase()==request_channel)
+                                {
                               
+                                    var temp_time=body[a].airstamp.split("T");
+                                    var final_time="";
+                                    temp_time=temp_time[1].split(":");
+                                    final_time=temp_time[0]+temp_time[1];
                                     
+                        
                                 
-                            result+=body[a].show.name
+                            result+=body[a].show.name+" at "+temp_time[0]+
                                +","+"<break time=\"1s\"/>";
                                 
-                            
+                            temp_time="";
+                                    final_time="";
                          
-                            
+                                }
                             
                         }
                     
