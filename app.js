@@ -176,16 +176,15 @@ app.post('/skill',requestVerifier,  function(req, res) {
                               
                                     var temp_time=body[a].airstamp.split("T");
                                     var final_time="";
-                              //      temp_time=temp_time[1].split(":");
-                                //    final_time=temp_time[0]+temp_time[1];
+                                    temp_time=temp_time[1].split(":");
+                                   final_time=temp_time[0]+temp_time[1];
                                     
                         
                                 
-                            result+=body[a].show.name+" at "+temp_time[1]+
+                            result+=body[a].show.name+" at "+final_time+
                                +","+"<break time=\"1s\"/>";
                                 
-                            temp_time="";
-                                    final_time="";
+                          
                          
                                 }
                             
