@@ -55,7 +55,7 @@ function requestVerifier(req, res, next) {
   
 // catch 404 and forward to error handler
 
-app.post('/skill',requestVerifier,  function(req, res) {
+app.post('/skill',  function(req, res) {
  
    var temp;
     if (req.body.request.type === 'LaunchRequest') { 
@@ -176,13 +176,16 @@ app.post('/skill',requestVerifier,  function(req, res) {
                               
                                     var temp_time=body[a].airstamp.split("T");
                                     var final_time="";
+                                    
                                     temp_time=temp_time[1].split(":");
-                                   final_time=temp_time[0]+temp_time[1];
+                                    
+                                   final_time=temp_time[0]+":"+temp_time[1];
+                                   
                                     
                         
                                 
-                            result+=body[a].show.name+" at "+final_time+
-                               +","+"<break time=\"1s\"/>";
+                            result+=body[a].show.name+" at "+final_time
+                             +"<break time=\"1s\"/>";
                                 
                           
                          
@@ -216,7 +219,7 @@ app.post('/skill',requestVerifier,  function(req, res) {
         "shouldEndSession": true,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>"+"Sorry no such channel"+
+          "ssml": "<speak>"+"Sorry there is no schedule or no channel with this name"+
             "</speak>"
         }
       }
