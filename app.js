@@ -189,10 +189,10 @@ app.post('/skill',  function(req, res) {
                                 //  temp_time=temp_time[1].split(":");
                              
                                   final_time=  body[a].airtime;
-                                    if(req.body.request.intent.slots.time.value==time_request)
+                                    if(time_request=="now")
                                         {
                                             var temp_time=final_time.split(":");
-                                            if(temp_time==request_time_now)
+                                            if(temp_time[0]==request_time_now)
                                                 {
                                                     final_time=tConvert(final_time);
                                                  result+=body[a].show.name+" at "+final_time
