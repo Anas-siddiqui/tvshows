@@ -207,7 +207,7 @@ app.post('/skill',  function(req, res) {
         "outputSpeech": {
           "type": "SSML",
           "ssml": "<speak>"+"Now Playing on "+request_channel+" : "+result+
-            "</speak>"
+            " According to Eastern time zone</speak>"
         }
       }
     });
