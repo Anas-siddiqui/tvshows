@@ -155,15 +155,16 @@ app.post('/skill',  function(req, res) {
       {
          var splitted_string=req.body.request.timestamp.split("T");
          var request_date=splitted_string[0];
-           if(req.body.request.intent.slots.time.value=="now")
+           if(req.body.request.intent.slots.time.value)
                                         {//   19:35:27Z
                                            var request_time_now=splitted_string[1];
                                             request_time_now=request_time_now.split(":");
                                             request_time_now=request_time_now[0];
+                                            var time_request=req.body.request.intent.slots.time.value;
+          time_request=time_request.toLowerCase();
                                         }
           
-          var time_request=req.body.request.intent.slots.time.value;
-          time_request=time_request.toLowerCase();
+          
           var request_channel=req.body.request.intent.slots.channel.value;
           request_channel=request_channel.toLowerCase();
           var final_time="";
@@ -188,7 +189,7 @@ app.post('/skill',  function(req, res) {
                                 //  temp_time=temp_time[1].split(":");
                              
                                   final_time=  body[a].airtime;
-                                    if(req.body.request.intent.slots.time.value=="now")
+                                    if(req.body.request.intent.slots.time.value==time_request)
                                         {
                                             var temp_time=final_time.split(":");
                                             if(temp_time==request_time_now)
