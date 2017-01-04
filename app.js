@@ -162,6 +162,7 @@ app.post('/skill',  function(req, res) {
                                             request_time_now=request_time_now[0];
                                             var time_request=req.body.request.intent.slots.time.value;
           time_request=time_request.toLowerCase();
+                                           
                                         }
           
           
@@ -191,6 +192,7 @@ app.post('/skill',  function(req, res) {
                                   final_time=  body[a].airtime;
                                     if(time_request=="now")
                                         {
+                                            
                                             var temp_time=final_time.split(":");
                                             if(temp_time[0]==request_time_now)
                                                 {
