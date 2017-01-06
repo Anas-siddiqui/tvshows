@@ -168,8 +168,9 @@ app.post('/skill',  function(req, res) {
           
           var request_channel=req.body.request.intent.slots.channel.value;
           request_channel=request_channel.toLowerCase();
+          request_channel=custom_channels(request_channel);
           var final_time="";
-        
+         request_channel=request_channel.toLowerCase();
           var result="";
           request({
         url: "http://api.tvmaze.com/schedule?country=US&date="+request_date,
@@ -335,6 +336,16 @@ function tConvert (time) {
     time[0] = +time[0] % 12 || 12; // Adjust hours
   }
   return time.join (''); // return adjusted time or original string
+}
+function custom_channels(channel_name)
+{
+    if(channel_name=="a and e"){return "A&E";}
+                                        
+    else if(channel_name=="investigation discovery"){return "ID";}
+      else if(channel_name=="fs one"||channel_name=="f s one"||channel_name=="f s 1"){return "FS1";}
+      else if(channel_name=="e news"|| channel_name="enews"){return "E!";}
+    
+    
 }
 
 
