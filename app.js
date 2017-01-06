@@ -344,6 +344,7 @@ function custom_channels(channel_name)
     else if(channel_name=="investigation discovery"){return "ID";}
       else if(channel_name=="fs one"||channel_name=="f s one"||channel_name=="f s 1"){return "FS1";}
       else if(channel_name=="e news"|| channel_name="enews"){return "E!";}
+       else if(channel_name=="espn 2"|| channel_name="espn two"){return "ESPN2";}
     
     
 }
