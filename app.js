@@ -132,7 +132,153 @@ app.post('/skill',  function(req, res) {
   }
   else if (req.body.request.type === 'IntentRequest' &&
            req.body.request.intent.name === 'getshows') {
+      if (
+       
+        !req.body.request.intent.slots.channel.value
+         
+         ) {
+        
+      res.json({
+      "version": "1.0",
+      "response": {
+        "shouldEndSession": false,
+        "outputSpeech": {
+          "type": "SSML",
+          "ssml": "<speak>Please say again including the channel name</speak>"
+          
+        }
+      }
+    });
+      
+    }
+      else
+      {
+            
+         var splitted_string=req.body.request.timestamp.split("T");
+      
+         var request_date=splitted_string[0];
+      
+           if(req.body.request.intent.slots.time.value)
+                                        {//   19:35:27Z
+                                           var request_time_now=splitted_string[1];
+                                            request_time_now=request_time_now.split(":");
+                                            request_time_now=request_time_now[0];
+                                            var time_request=req.body.request.intent.slots.time.value;
+          time_request=time_request.toLowerCase();
+                                           
+                                        }
+         
+          var request_channel=req.body.request.intent.slots.channel.value;
      
+          request_channel=request_channel.toLowerCase();
+        
+          request_channel=custom_channels(request_channel);
+            
+          var final_time="";
+         request_channel=request_channel.toLowerCase();
+          var result="";
+        
+          request({
+        url: "http://api.tvmaze.com/schedule?country=US&date="+request_date,
+        json: true
+    }, function (error, response, body) {
+       
+
+        if (!error && response.statusCode === 200) {
+            console.log("here 7");
+            if(body.length!=0)
+                {
+                   
+                    for(var a=0;a<body.length;a++)
+                        {
+                            if(body[a].show.network.name.toLowerCase()==request_channel)
+                                {
+                                    final_time="";
+                                  
+                                //  temp_time=temp_time[1].split(":");
+                             
+                                  final_time=  body[a].airtime;
+                                    if(time_request=="now")
+                                        {
+                                            
+                                            var temp_time=final_time.split(":");
+                                            if(temp_time[0]==request_time_now)
+                                                {
+                                                    final_time=tConvert(final_time);
+                                                 result+=body[a].show.name+" at "+final_time
+                             +"<break time=\"1s\"/>";
+                                                }
+                                           
+                                        }
+                              else{
+                                   // var temp_time=body[a].airstamp.split("T");
+                                     
+                                //final_time=temp_time[0]+":"+temp_time[1];
+                                    final_time=tConvert(final_time);
+                                   
+                                    
+                        
+                                
+                            result+=body[a].show.name+" at "+final_time
+                             +"<break time=\"1s\"/>";
+                              }
+                                
+                          
+                         
+                                }
+                            
+                        }
+                    
+                    
+                }
+            
+            if(result.length!=0){
+            
+            res.json({
+      "version": "1.0",
+      "response": {
+        "shouldEndSession": true,
+        "outputSpeech": {
+          "type": "SSML",
+          "ssml": "<speak>"+"Now Playing on "+request_channel+" : "+result+
+            " According to Eastern time zone</speak>"
+        }
+      }
+    });
+            result="";
+            }
+            else{
+                
+                  res.json({
+      "version": "1.0",
+      "response": {
+        "shouldEndSession": true,
+        "outputSpeech": {
+          "type": "SSML",
+          "ssml": "<speak>"+"Sorry there is no schedule or no channel with this name"+
+            "</speak>"
+        }
+      }
+    });
+                
+                
+            }
+          
+            
+          
+            
+             
+        }
+            
+    });
+    
+          
+          
+          
+          
+          
+          
+      }
   }
       
       
@@ -204,9 +350,10 @@ function custom_channels(channel_name)
     if(channel_name=="a and e"){return "A&E";}
                                         
     else if(channel_name=="investigation discovery"){return "ID";}
-      else if(channel_name=="fs one"||channel_name=="f s one"||channel_name=="f s 1"){return "FS1";}
+      else if(channel_name=="fs one"||channel_name=="f s one"||channel_name=="f s 1"||channel_name=="fs 1"){return "FS1";}
       else if(channel_name=="e news"|| channel_name=="enews"){return "E!";}
        else if(channel_name=="espn 2"|| channel_name=="espn two"){return "ESPN2";}
+    else{return channel_name;}
     
     
 }
