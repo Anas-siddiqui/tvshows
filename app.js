@@ -65,7 +65,7 @@ app.post('/skill',requestVerifier,  function(req, res) {
         "shouldEndSession": false,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>Welcome to What's on, here you can ask schedule for each channel. only in the United states/speak>"
+          "ssml": "<speak>Welcome to What's on, here you can ask schedule for each channel. only in the United states, start by asking alexa what's on CNN today/speak>"
           
         }
       }
@@ -120,7 +120,7 @@ app.post('/skill',requestVerifier,  function(req, res) {
         "outputSpeech": {
           "type": "SSML",
           "ssml": "<speak>You can ask me for example: CNN today"+"<break time=\"1s\"/>"
-            +"Playing on Discovery"+
+            +"Playing on Discovery now"+
             +"</speak>"
           
         }
@@ -144,7 +144,7 @@ app.post('/skill',requestVerifier,  function(req, res) {
         "shouldEndSession": false,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>Please say again including the channel name</speak>"
+          "ssml": "<speak>Please speak again including the channel name</speak>"
           
         }
       }
