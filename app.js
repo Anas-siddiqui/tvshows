@@ -55,7 +55,7 @@ function requestVerifier(req, res, next) {
   
 // catch 404 and forward to error handler
 
-app.post('/skill',  function(req, res) {
+app.post('/skill',requestVerifier,  function(req, res) {
  
    var temp;
     if (req.body.request.type === 'LaunchRequest') { 
