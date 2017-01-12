@@ -65,7 +65,7 @@ app.post('/skill',requestVerifier,  function(req, res) {
         "shouldEndSession": false,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>Welcome to What's on, here you can ask schedule for each channel. only in the United states, start by asking alexa what's on CNN today/speak>"
+          "ssml": "<speak>Welcome to What's on, here you can ask schedule for each channel. only in the United states, start by asking alexa what's on CNN today</speak>"
           
         }
       }
