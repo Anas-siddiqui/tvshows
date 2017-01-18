@@ -16,7 +16,7 @@ var to_search="";
  var final_result;
 var json_final="";
 
-
+var card_text="";
 
 
 // view engine setup
@@ -193,6 +193,7 @@ app.post('/skill',requestVerifier,  function(req, res) {
                         {
                             if(body[a].show.network.name.toLowerCase()==request_channel)
                                 {
+                                    if(request_channel=="a&e"){request_channel="a and e";}
                                     final_time="";
                                   
                                 //  temp_time=temp_time[1].split(":");
@@ -207,6 +208,8 @@ app.post('/skill',requestVerifier,  function(req, res) {
                                                     final_time=tConvert(final_time);
                                                  result+=body[a].show.name+" at "+final_time
                              +"<break time=\"1s\"/>";
+                                  card_text+=body[a].show.name+" at "+final_time+" ";
+                                                
                                                 }
                                            
                                         }
@@ -221,7 +224,18 @@ app.post('/skill',requestVerifier,  function(req, res) {
                                 
                             result+=body[a].show.name+" at "+final_time
                              +"<break time=\"1s\"/>";
+                                  card_text+=body[a].show.name+" at "+final_time+" ";
+                           
                               }
+                                    
+                                    
+                                    
+                                    
+                   
+                                    
+                                    
+                                    
+                                    
                                 
                           
                          
@@ -242,10 +256,19 @@ app.post('/skill',requestVerifier,  function(req, res) {
           "type": "SSML",
           "ssml": "<speak>"+"Now Playing on "+request_channel+" : "+result+
             " According to Eastern time zone</speak>"
-        }
+        },"card": {
+      "type": "Standard",
+      "title": "What's on",
+      "text": "Now Playing on "+request_channel.toUpperCase()+" "+card_text,
+      "image": {
+        "smallImageUrl": "https://tvshows-alexa.herokuapp.com/card_image.png"
+       
+      }
+    }
       }
     });
             result="";
+                card_text="";
             }
             else{
                 
@@ -353,6 +376,11 @@ function custom_channels(channel_name)
       else if(channel_name=="fs one"||channel_name=="f s one"||channel_name=="f s 1"||channel_name=="fs 1"){return "FS1";}
       else if(channel_name=="e news"|| channel_name=="enews"){return "E!";}
        else if(channel_name=="espn 2"|| channel_name=="espn two"){return "ESPN2";}
+  
+    else if(channel_name=="h. b. o."){return "HBO";}
+    else if(channel_name=="e. s. p."|| channel_name=="e. s. p. n." ){return "ESPN";}
+  else if(channel_name=="c. n. b."|| channel_name=="c. n. b. c." ){return "CNBC";}
+    
     else{return channel_name;}
     
     
