@@ -65,7 +65,7 @@ app.post('/skill',requestVerifier,  function(req, res) {
         "shouldEndSession": false,
         "outputSpeech": {
           "type": "SSML",
-          "ssml": "<speak>Welcome to What's on, here you can ask schedule for each channel. only in the United states, start by asking alexa what's on CNN today</speak>"
+          "ssml": "<speak>Welcome to What's on, To see what's on a tv channel today for example just say alexa ask what's on CNN</speak>"
           
         }
       }
@@ -261,7 +261,7 @@ app.post('/skill',requestVerifier,  function(req, res) {
       "title": "What's on",
       "text": "Now Playing on "+request_channel.toUpperCase()+" "+card_text,
       "image": {
-        "smallImageUrl": "https://tvshows-alexa.herokuapp.com/card_image.png"
+        "smallImageUrl": "http://tvshows-alexa.herokuapp.com/card_image.png"
        
       }
     }
