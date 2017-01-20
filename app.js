@@ -261,7 +261,7 @@ app.post('/skill',requestVerifier,  function(req, res) {
       "title": "What's on",
       "text": "Now Playing on "+request_channel.toUpperCase()+" "+card_text,
       "image": {
-        "smallImageUrl": "http://tvshows-alexa.herokuapp.com/card_image.png"
+        "smallImageUrl": "https://tvshows-alexa.herokuapp.com/card_image.png"
        
       }
     }
