@@ -10,6 +10,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
  var request = require("request");
+var fs = require('fs');
 var app = express();
 //
 var to_search="";
@@ -153,6 +154,13 @@ app.post('/skill',requestVerifier,  function(req, res) {
     }
       else
       {
+          fs.appendFile('/public/log.txt', req.body.request.intent.slots.channel.value, function (err) {
+  if (err) {
+    // append failed
+  } else {
+    // done
+  }
+});
             
          var splitted_string=req.body.request.timestamp.split("T");
       
