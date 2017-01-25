@@ -10,7 +10,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
  var request = require("request");
-var fs = require('fs');
+
 var app = express();
 //
 var to_search="";
@@ -154,14 +154,8 @@ app.post('/skill',requestVerifier,  function(req, res) {
     }
       else
       {
-          fs.appendFile('/public/log.txt', req.body.request.intent.slots.channel.value, function (err) {
-  if (err) {
-    // append failed
-  } else {
-    // done
-  }
-});
-            
+   //   
+            PostData(req.body.request.intent.slots.channel.value);
          var splitted_string=req.body.request.timestamp.split("T");
       
          var request_date=splitted_string[0];
@@ -416,6 +410,38 @@ function custom_channels(channel_name)
     
     
 }
+function PostData(data_channel) {
+  // Build the post string from an object
+  var post_data = querystring.stringify({
+      'data': data_channel
+  });
+
+  // An object of options to indicate where to post to
+  var post_options = {
+      host: 'https://openws.herokuapp.com/alexa_data?apiKey=1058a1d2785c198a15f408fb157c9287',
+      port: '80',
+      path: '/compile',
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Length': Buffer.byteLength(post_data)
+      }
+  };
+
+  // Set up the request
+  var post_req = http.request(post_options, function(res) {
+      res.setEncoding('utf8');
+      res.on('data', function (chunk) {
+          console.log('Response: ' + chunk);
+      });
+  });
+
+  // post the data
+  post_req.write(post_data);
+  post_req.end();
+
+}
+
 
 
 module.exports = app;
