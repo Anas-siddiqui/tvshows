@@ -17,7 +17,7 @@ var to_search="";
 var json_final="";
 
 var card_text="";
-
+var timerstamp;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -167,6 +167,10 @@ app.post('/skill',requestVerifier,  function(req, res) {
           time_request=time_request.toLowerCase();
                                            
                                         }
+           if(req.body.request.intent.slots.stamp.value)
+               {
+                 
+               }
          
           var request_channel=req.body.request.intent.slots.channel.value;
      
@@ -213,6 +217,25 @@ app.post('/skill',requestVerifier,  function(req, res) {
                                                 }
                                            
                                         }
+                                    
+                         else if(req.body.request.intent.slots.stamp.value)
+                             
+                             {
+                 var stamp_split=req.body.request.intent.slots.stamp.value.split(":"); 
+                             
+                                 var temp_time=final_time.split(":");
+                                 if(temp_time[0]==stamp_split[0])
+                                                {
+                                                    final_time=tConvert(final_time);
+                                                 result+=body[a].show.name+" at "+final_time
+                             +"<break time=\"1s\"/>";
+                                  card_text+=body[a].show.name+" at "+final_time+" ";
+                                                    stamp_split="";
+                                                
+                                                }
+                                 
+                         
+                             }
                               else{
                                    // var temp_time=body[a].airstamp.split("T");
                                      
