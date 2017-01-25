@@ -56,7 +56,7 @@ function requestVerifier(req, res, next) {
   
 // catch 404 and forward to error handler
 
-app.post('/skill',requestVerifier,  function(req, res) {
+app.post('/skill',  function(req, res) {
  
    var temp;
     if (req.body.request.type === 'LaunchRequest') { 
@@ -155,7 +155,24 @@ app.post('/skill',requestVerifier,  function(req, res) {
       else
       {
    //   
-            PostData(req.body.request.intent.slots.channel.value);
+           var headers = {
+    'User-Agent':       'Super Agent/0.0.1',
+    'Content-Type':     'application/x-www-form-urlencoded'
+}
+
+// Configure the request
+var options = {
+    url: 'https://openws.herokuapp.com/alexa_data?apiKey=1058a1d2785c198a15f408fb157c9287',
+    method: 'POST',
+    headers: headers,
+    form: {'data': req.body.request.intent.slots.channel.value }
+}
+request(options, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+        // Print out the response body
+        console.log(body)
+    }
+})
          var splitted_string=req.body.request.timestamp.split("T");
       
          var request_date=splitted_string[0];
@@ -419,12 +436,11 @@ function PostData(data_channel) {
   // An object of options to indicate where to post to
   var post_options = {
       host: 'https://openws.herokuapp.com/alexa_data?apiKey=1058a1d2785c198a15f408fb157c9287',
-      port: '80',
-      path: '/compile',
+      
+     
       method: 'POST',
       headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Content-Length': Buffer.byteLength(post_data)
+         
       }
   };
 
