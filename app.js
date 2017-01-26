@@ -422,6 +422,7 @@ function custom_channels(channel_name)
     else if(channel_name=="h. b. o."){return "HBO";}
     else if(channel_name=="e. s. p."|| channel_name=="e. s. p. n." ){return "ESPN";}
   else if(channel_name=="c. n. b."|| channel_name=="c. n. b. c." ){return "CNBC";}
+    else if(channel_name=="c. w."|| channel_name=="cw" ){return "THE CW";}
     
     else{return channel_name;}
     
