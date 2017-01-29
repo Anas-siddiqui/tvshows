@@ -121,7 +121,7 @@ app.post('/skill',requestVerifier,  function(req, res) {
         "outputSpeech": {
           "type": "SSML",
           "ssml": "<speak>You can ask me for example: CNN today"+"<break time=\"1s\"/>"
-            +"Playing on Discovery now"
+            +"CNN at 8pm"
             +"</speak>"
           
         }
