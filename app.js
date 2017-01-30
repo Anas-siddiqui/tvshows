@@ -208,7 +208,7 @@ request(options, function (error, response, body) {
        
 
         if (!error && response.statusCode === 200) {
-            console.log("here 7");
+           
             if(body.length!=0)
                 {
                    
@@ -284,11 +284,13 @@ request(options, function (error, response, body) {
                                 }
                             
                         }
+                    result=result.replace('&','and');
                     
                     
                 }
             
             if(result.length!=0){
+                
             
             res.json({
       "version": "1.0",
