@@ -301,13 +301,10 @@ request(options, function (error, response, body) {
           "ssml": "<speak>"+"Now Playing on "+request_channel+" : "+result+
             " According to Eastern time zone</speak>"
         },"card": {
-      "type": "Standard",
-      "title": "What's on",
-      "text": "Now Playing on "+request_channel.toUpperCase()+" "+card_text,
-      "image": {
-        "smallImageUrl": "https://tvshows-alexa.herokuapp.com/card_image.png"
-       
-      }
+      "type": "Simple",
+      "title": "Schedule",
+      "content": "Now Playing on "+request_channel.toUpperCase()+" "+card_text,
+     
     }
       }
     });
